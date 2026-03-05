@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment{
         IMAGE_NAME = 'ayeshadockerhub/trend-app'
-        IMAGE_TAG = ${BUILD_NUMBER}
+        IMAGE_TAG = '${BUILD_NUMBER}'
         CLUSTER_NAME = 'trend-eks-cluster'
         AWS_REGION = 'us-east-1'
     }
