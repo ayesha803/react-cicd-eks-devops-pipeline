@@ -9,5 +9,5 @@ COPY dist/* /usr/share/nginx/html/
 # Expose container port
 EXPOSE 80
 
-# Start nginx in foreground
+# Start nginx in foreground 
 CMD ["nginx", "-g", "daemon off;"]
