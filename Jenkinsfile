@@ -27,7 +27,7 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
         stage('Update Kubernetes YAML'){
     steps{
         sh '''
-        sed -i "s|image: ayeshadockerhub/trend-app:.*|image: $IMAGE_NAME:$IMAGE_TAG|" trend-app.yaml
+        sed -i "s|image: ayeshadockerhub/trend-app:.*|image: $IMAGE_NAME:$IMAGE_TAG|" trend-app.yml
         '''
     }
 }
