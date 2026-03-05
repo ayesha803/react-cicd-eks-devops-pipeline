@@ -35,7 +35,7 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
         stage('Configure & Deploy to EKS'){
     steps{
         sh '''
-        aws eks update-kubeconfig --region us-east-1 --name trend-eks-cluster
+        aws eks update-kubeconfig --region us-east-1 --name trend-cluster
         
         kubectl apply -f trend-app.yml
         kubectl apply -f trend-service.yml
