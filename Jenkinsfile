@@ -15,7 +15,7 @@ pipeline{
         
         stage ('Docker login & push the image'){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'dockerhubcreds', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerhubcredentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
     sh '''echo $DOCKER_PASSWORD |  docker login -u $DOCKER_USERNAME --password-stdin
 '''
 sh "docker push $IMAGE_NAME:$IMAGE_TAG"
