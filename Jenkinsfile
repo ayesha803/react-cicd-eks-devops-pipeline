@@ -44,7 +44,7 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
         
         aws iam create-policy \
     --policy-name AWSLoadBalancerControllerIAMPolicy \
-    --policy-document https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/iam-policy.json
+    --policy-document https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/iam-policy.json || true
 
     eksctl create iamserviceaccount \
   --cluster=trend-cluster \
