@@ -58,23 +58,12 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
     }
 }
 
-        stage ('get vpc ID & install alb controller') {
-            steps{
-                sh '''
-                 VPC_ID=$(aws eks describe-cluster \
-                --name trend-cluster \
-                --region us-east-1 \
-                --query 'cluster.resourcesVpcConfig.vpcId' \
-                --output text)
-
-                '''
-
-            }
-        }
 
         stage ('install alb controller') {
             steps{
                 sh '''
+                VPC_ID=$(aws eks describe-cluster --name trend-cluster --region us-east-1 --query 'cluster.resourcesVpcConfig.vpcId' --output text) 
+                echo "$VPC_ID"
                 helm repo add eks https://aws.github.io/eks-charts
                  helm repo update eks
                   helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system \
