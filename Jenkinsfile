@@ -39,6 +39,7 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
         
         kubectl apply -f trend-app.yml
         kubectl apply -f trend-service.yml
+        kubectl apply -f trend-ingress.yml
         '''
     }
 }
