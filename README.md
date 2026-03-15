@@ -8,6 +8,13 @@ The pipeline automates the process of building, containerizing, and deploying th
 
 The application is exposed externally using AWS Load Balancer Controller, which provisions an Application Load Balancer for external access.
 
+eksctl create cluster \
+--name trend-cluster \
+--region us-east-1 \
+--nodegroup-name trend-nodes \
+--node-type t3.small \
+--nodes 2
+
 **Architecture**
 
 The deployment pipeline follows this workflow:
