@@ -69,14 +69,19 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
     env.VPC_ID = vpcId
 }
 
-                helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system \
+            }
+        }
+
+        stage {
+            steps('install alb controller'){
+                sh '''
+                  helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system \
   --set clusterName=demo-cluster \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set region=us-east-1 \
   --set vpcId=env.VPC_ID
-
-
+  '''
             }
         }
     }
