@@ -82,7 +82,7 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set region=us-east-1 \
-  --set vpcId=VPC_ID
+  --set vpcId=$VPC_ID
   '''
             }
         }
