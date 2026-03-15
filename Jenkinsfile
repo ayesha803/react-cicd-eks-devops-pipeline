@@ -75,6 +75,8 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
         stage ('install alb controller') {
             steps{
                 sh '''
+                helm repo add eks https://aws.github.io/eks-charts
+                 helm repo update eks
                   helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system \
   --set clusterName=trend-cluster \
   --set serviceAccount.create=false \
