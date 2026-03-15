@@ -22,8 +22,8 @@ systemctl start docker
 systemctl enable docker
 
 # Add ubuntu & jenkins users to docker group
-usermod -aG docker ubuntu
-usermod -aG docker jenkins
+sudo usermod -aG docker ubuntu
+sudo usermod -aG docker jenkins
 
 
 # Install kubectl (latest stable)
@@ -40,5 +40,5 @@ unzip awscliv2.zip
 sudo ./aws/install
 
 # Enable and start Jenkins
-systemctl enable jenkins
-systemctl start jenkins
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
