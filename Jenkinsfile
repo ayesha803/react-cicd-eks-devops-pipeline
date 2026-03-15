@@ -60,14 +60,14 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
 
         stage {
             steps('get vpc ID & install alb controller'){
-                script {
-    def vpcId = sh(
-        script: "aws eks describe-cluster --name trend-cluster --region us-east-1 --query 'cluster.resourcesVpcConfig.vpcId' --output text",
-        returnStdout: true
-    ).trim()
-    
-    env.VPC_ID = vpcId
-}
+                sh '''
+                 VPC_ID=$(aws eks describe-cluster \
+                --name trend-cluster \
+                --region us-east-1 \
+                --query 'cluster.resourcesVpcConfig.vpcId' \
+                --output text)
+
+                '''
 
             }
         }
@@ -80,7 +80,7 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set region=us-east-1 \
-  --set vpcId=env.VPC_ID
+  --set vpcId=VPC_ID
   '''
             }
         }
