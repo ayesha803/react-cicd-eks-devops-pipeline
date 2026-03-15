@@ -17,7 +17,7 @@ sudo apt update
 sudo apt install jenkins -y
 
 # Install Docker
-apt install -y docker.io
+sudo apt install -y docker.io
 systemctl start docker
 systemctl enable docker
 
