@@ -40,6 +40,32 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
         kubectl apply -f trend-app.yml
         kubectl apply -f trend-service.yml
         kubectl apply -f trend-ingress.yml
+        eksctl utils associate-iam-oidc-provider --cluster demo-cluster --approve
+        
+        aws iam create-policy \
+    --policy-name AWSLoadBalancerControllerIAMPolicy \
+    --policy-document https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/iam-policy.json
+
+    eksctl create iamserviceaccount \
+  --cluster=demo-cluster \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --role-name AmazonEKSLoadBalancerControllerRole \
+  --attach-policy-arn=arn:aws:iam::956123261594:policy/AWSLoadBalancerControllerIAMPolicy \
+  --approve
+
+
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system \
+  --set clusterName=demo-cluster \
+  --set serviceAccount.create=false \
+  --set serviceAccount.name=aws-load-balancer-controller \
+  --set region=us-east-1 \
+  --set vpcId=vpc-039be1a9a4ae4dd92
+
+
+
+    
+
         '''
     }
 }
