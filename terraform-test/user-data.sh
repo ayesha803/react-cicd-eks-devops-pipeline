@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Update system
-apt update -y
+sudo apt update -y
 apt upgrade -y
 
 # Install Java (Jenkins requirement)
