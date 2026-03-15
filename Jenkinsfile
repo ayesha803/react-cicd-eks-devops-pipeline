@@ -47,7 +47,7 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
     --policy-document https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/iam-policy.json
 
     eksctl create iamserviceaccount \
-  --cluster=demo-cluster \
+  --cluster=trend-cluster \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --role-name AmazonEKSLoadBalancerControllerRole \
@@ -76,7 +76,7 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
             steps{
                 sh '''
                   helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system \
-  --set clusterName=demo-cluster \
+  --set clusterName=trend-cluster \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set region=us-east-1 \
