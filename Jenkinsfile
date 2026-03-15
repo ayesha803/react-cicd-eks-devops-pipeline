@@ -58,8 +58,8 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
     }
 }
 
-        stage {
-            steps('get vpc ID & install alb controller'){
+        stage ('get vpc ID & install alb controller') {
+            steps{
                 sh '''
                  VPC_ID=$(aws eks describe-cluster \
                 --name trend-cluster \
@@ -72,8 +72,8 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
             }
         }
 
-        stage {
-            steps('install alb controller'){
+        stage ('install alb controller') {
+            steps{
                 sh '''
                   helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system \
   --set clusterName=demo-cluster \
