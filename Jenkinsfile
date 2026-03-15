@@ -40,7 +40,7 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
         kubectl apply -f trend-app.yml
         kubectl apply -f trend-service.yml
         kubectl apply -f trend-ingress.yml
-        eksctl utils associate-iam-oidc-provider --cluster demo-cluster --approve
+        eksctl utils associate-iam-oidc-provider --cluster trend-cluster --approve
         
         aws iam create-policy \
     --policy-name AWSLoadBalancerControllerIAMPolicy \
