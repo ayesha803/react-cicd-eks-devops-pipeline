@@ -40,22 +40,7 @@ sh "docker push $IMAGE_NAME:$IMAGE_TAG"
         kubectl apply -f trend-app.yml
         kubectl apply -f trend-service.yml
         kubectl apply -f trend-ingress.yml
-        eksctl utils associate-iam-oidc-provider --cluster trend-cluster --approve
-
-        curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.11.0/docs/install/iam_policy.json
-        
-       aws iam create-policy \
-    --policy-name AWSLoadBalancerControllerIAMPolicy \
-    --policy-document file://iam_policy.json || true
-
-    eksctl create iamserviceaccount \
-  --cluster=trend-cluster \
-  --namespace=kube-system \
-  --name=aws-load-balancer-controller \
-  --role-name AmazonEKSLoadBalancerControllerRole \
-  --attach-policy-arn=arn:aws:iam::956123261594:policy/AWSLoadBalancerControllerIAMPolicy \
-  --approve \
-  --override-existing-serviceaccounts
+    
 
         '''
     }
